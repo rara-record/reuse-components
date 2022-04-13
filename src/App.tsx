@@ -1,26 +1,98 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled, { ThemeProvider } from 'styled-components';
+import Button from './components/Button';
+import Dialog from './components/Dialog';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider
+      theme={{
+        palette: {
+          blue: '#228be6',
+          gray: '#495057',
+          pink: '#f06595',
+        },
+      }}
+    >
+      <AppBlock>
+        {/* default */}
+        <ButtonGroup>
+          <Button size="large">BUTTON</Button>
+          <Button>BUTTON</Button>
+          <Button size="small">BUTTON</Button>
+        </ButtonGroup>
+
+        {/* gray */}
+        <ButtonGroup>
+          <Button color="gray" size="large">
+            BUTTON
+          </Button>
+          <Button color="gray">BUTTON</Button>
+          <Button color="gray" size="small">
+            BUTTON
+          </Button>
+        </ButtonGroup>
+
+        {/* pink */}
+        <ButtonGroup>
+          <Button color="pink" size="large">
+            BUTTON
+          </Button>
+          <Button color="pink">BUTTON</Button>
+          <Button color="pink" size="small">
+            BUTTON
+          </Button>
+        </ButtonGroup>
+
+        {/* outline */}
+        <ButtonGroup>
+          <Button size="large" outline>
+            BUTTON
+          </Button>
+          <Button color="gray" outline>
+            BUTTON
+          </Button>
+          <Button color="pink" size="small" outline>
+            BUTTON
+          </Button>
+        </ButtonGroup>
+
+        {/* fullWidth */}
+        <ButtonGroup>
+          <Button size="large" fullWidth>
+            BUTTON
+          </Button>
+          <Button size="large" color="gray" fullWidth>
+            BUTTON
+          </Button>
+          <Button size="large" color="pink" fullWidth>
+            BUTTON
+          </Button>
+        </ButtonGroup>
+      </AppBlock>
+      <Dialog
+        title="정말로 삭제하시겠습니까?"
+        confirmText="삭제"
+        cancelText="취소"
+      >
+        데이터를 정말로 삭제하시겠습니까?
+      </Dialog>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
+
+const AppBlock = styled.div`
+  width: 512px;
+  margin: 0 auto;
+  margin-top: 4rem;
+  border: 1px solid black;
+  padding: 1rem;
+`;
+
+const ButtonGroup = styled.div`
+  & + & {
+    // & + & 가 의미 하는 것은 .Button + .Button
+    margin-top: 1rem;
+  }
+`;
